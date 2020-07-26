@@ -1,17 +1,24 @@
 import React from "react";
 import "./App.css";
 import fetchJobs from "./fetchJobs";
-// import {Container} from 'react-bootstrap'
+import { Container } from "react-bootstrap";
+import Job from "./Job";
 
 function App() {
-  const { jobs, load, err } = fetchJobs();
+  const { jobs, loading, error } = fetchJobs();
   return (
-    <div className="App">
-      <h1>GITHUB Jobs</h1>
-      {load && <h1>Loading...</h1>}
-      {err && <h1>Error :/ May be you should refresh</h1>}
-      <h1>{jobs.length}</h1>
-    </div>
+    <Container className="my-4">
+      <h1 className="mb-4">GitHub Jobs</h1>
+
+
+    
+      
+      {loading && <h1>Loading...</h1>}
+      {error && <h1>Error. Try Refreshing.</h1>}
+      {jobs.map(job => {
+        return <Job key={job.id} job={job} />
+      })}
+    </Container>
   );
 }
 
